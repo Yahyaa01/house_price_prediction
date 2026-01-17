@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 House Price Prediction Dashboard</h1>
+        <form method="POST">
+            <label>Square Feet:</label>
+            <input type="number" name="square_feet" step="0.01" required>
+
+            <label>Number of Rooms:</label>
+            <input type="number" name="num_rooms" required>
+
+            <label>Age of House (years):</label>
+            <input type="number" name="age" required>
+
+            <label>Distance to City (km):</label>
+            <input type="number" name="distance_to_city" step="0.01" required>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+
+        <h2>Data Visualizations</h2>
+        <div class="plots">
+            {% for plot in plot_files %}
+                <div class="plot-container">
+                    <img src="{{ url_for('static', filename=plot) }}" alt="Plot">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
